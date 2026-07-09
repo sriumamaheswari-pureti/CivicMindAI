@@ -19,9 +19,9 @@ const App = () => {
   const [user, setUser] = useState({
     id: '60c72b2f9b1d8a2c28654877',
     role: 'citizen',
-    name: localStorage.getItem('citizenName') || 'Rama Rao',
+    name: localStorage.getItem('citizenName') ,
     email: 'citizen@civicmind.in',
-    phone: localStorage.getItem('citizenPhone') || '9876543210'
+    phone: localStorage.getItem('citizenPhone') 
   });
 
   // Dark Mode mounting
