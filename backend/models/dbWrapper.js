@@ -127,7 +127,12 @@ class ModelWrapper {
     if (update.$push) {
       for (const arrayKey in update.$push) {
         if (!list[index][arrayKey]) list[index][arrayKey] = [];
-        list[index][arrayKey].push(update.$push[arrayKey]);
+        const pushVal = update.$push[arrayKey];
+        if (pushVal && typeof pushVal === 'object' && pushVal.$each && Array.isArray(pushVal.$each)) {
+          list[index][arrayKey].push(...pushVal.$each);
+        } else {
+          list[index][arrayKey].push(pushVal);
+        }
       }
     }
 
