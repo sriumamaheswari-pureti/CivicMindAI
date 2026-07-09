@@ -77,6 +77,17 @@ const connectDB = async () => {
             createdAt: new Date().toISOString()
           }
         ],
+        admins: [
+          {
+            _id: "60c72b2f9b1d8a2c28654879",
+            name: "GVMC Super Admin",
+            email: "admin@gvmc.gov.in",
+            phone: "9999999999",
+            passwordHash: "$2a$10$X8LdC4G80sP7tY.J8s95aO7.oB32sJ12L0uYpYQkG4e/Vd49xU61e", // "password123"
+            role: "admin",
+            createdAt: new Date().toISOString()
+          }
+        ],
         complaints: [],
         notifications: [],
         chatHistories: []

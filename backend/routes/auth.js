@@ -4,6 +4,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 const Officer = require('../models/Officer');
+const Admin = require('../models/Admin');
 const authMiddleware = require('../middleware/auth');
 
 const JWT_SECRET = process.env.JWT_SECRET || 'civicmind_secret_key_2026';
@@ -67,19 +68,41 @@ router.post('/login', async (req, res) => {
   }
 
   try {
-    // 1. Check Super Admin Static Credentials
-    if (email.toLowerCase() === 'admin@gvmc.gov.in' && password === 'admin123') {
+    // 1. Check Admin Database (with auto-seeding of default admin)
+    let admin = await Admin.findOne({ email });
+    if (!admin && email.toLowerCase() === 'admin@gvmc.gov.in') {
+      if (password === 'admin123') {
+        const salt = await bcrypt.genSalt(10);
+        const passwordHash = await bcrypt.hash('admin123', salt);
+        admin = await Admin.create({
+          _id: "60c72b2f9b1d8a2c28654879",
+          name: "GVMC Super Admin",
+          email: "admin@gvmc.gov.in",
+          phone: "9999999999",
+          passwordHash,
+          role: "admin"
+        });
+      }
+    }
+
+    if (admin) {
+      const isMatch = await bcrypt.compare(password, admin.passwordHash);
+      if (!isMatch) {
+        return res.status(400).json({ message: 'Invalid credentials.' });
+      }
+
       const token = jwt.sign(
-        { id: 'super_admin_gvmc', role: 'admin', name: 'GVMC Super Admin' },
+        { id: admin._id, role: 'admin', name: admin.name },
         JWT_SECRET,
         { expiresIn: '7d' }
       );
+
       return res.json({
         token,
         user: {
-          id: 'super_admin_gvmc',
-          name: 'GVMC Super Admin',
-          email: 'admin@gvmc.gov.in',
+          id: admin._id,
+          name: admin.name,
+          email: admin.email,
           role: 'admin'
         }
       });
@@ -155,6 +178,15 @@ router.post('/login', async (req, res) => {
 router.get('/me', authMiddleware(), async (req, res) => {
   try {
     if (req.user.role === 'admin') {
+      const adminObj = await Admin.findById(req.user.id);
+      if (adminObj) {
+        return res.json({
+          id: adminObj._id,
+          name: adminObj.name,
+          email: adminObj.email,
+          role: 'admin'
+        });
+      }
       return res.json({
         id: 'super_admin_gvmc',
         name: 'GVMC Super Admin',
