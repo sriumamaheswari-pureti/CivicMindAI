@@ -1,4 +1,4 @@
-````markdown
+
 # 🏙️ CivicMind AI
 
 **CivicMind AI** is an AI-powered civic grievance management platform developed for the citizens of **Visakhapatnam (GVMC)**. It enables users to report civic issues through **text, voice, images, or videos**, while AI automatically classifies complaints, identifies the responsible department, and routes them for faster resolution.
