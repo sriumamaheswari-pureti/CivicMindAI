@@ -75,7 +75,7 @@ router.get('/analytics', authMiddleware('admin'), async (req, res) => {
       }
     });
 
-    const averageResolutionTimeHours = resolvedCountForAvg > 0 
+    const averageResolutionTimeHours = resolvedCountForAvg > 0
       ? Math.round((totalResolutionTimeMs / (1000 * 60 * 60 * resolvedCountForAvg)) * 10) / 10
       : 24.8; // default mock benchmark average if none resolved yet
 

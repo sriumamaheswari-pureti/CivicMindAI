@@ -314,7 +314,7 @@ const AdminDashboard = () => {
                     value={newOfficer.phone}
                     onChange={(e) => setNewOfficer({ ...newOfficer, phone: e.target.value })}
                     placeholder="e.g. 9440801010"
-                    className="mt-1 block w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-850 rounded-xl px-3.5 py-2.5 text-xs text-slate-855 dark:text-white focus:outline-none focus:ring-1 focus:ring-primary-500"
+                    className="mt-1 block w-full bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-855 rounded-xl px-3.5 py-2.5 text-xs text-slate-855 dark:text-white focus:outline-none focus:ring-1 focus:ring-primary-500"
                   />
                 </div>
 

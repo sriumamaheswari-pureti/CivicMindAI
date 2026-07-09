@@ -8,7 +8,7 @@ import ReportComplaint from './pages/ReportComplaint';
 import TrackComplaint from './pages/TrackComplaint';
 import CitizenDashboard from './pages/CitizenDashboard';
 import OfficerDashboard from './pages/OfficerDashboard';
-import AdminDashboard from './pages/AdminDashboard';
+import AdminDashboard from './admin/AdminDashboard';
 import API from './utils/api';
 
 const App = () => {

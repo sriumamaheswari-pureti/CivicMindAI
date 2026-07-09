@@ -4,7 +4,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 const Officer = require('../models/Officer');
-const Admin = require('../models/Admin');
+const Admin = require('../admin/Admin');
 const authMiddleware = require('../middleware/auth');
 
 const JWT_SECRET = process.env.JWT_SECRET || 'civicmind_secret_key_2026';

@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const ModelWrapper = require('./dbWrapper');
+const ModelWrapper = require('../models/dbWrapper');
 
 const adminSchema = new mongoose.Schema({
   name: { type: String, required: true },
