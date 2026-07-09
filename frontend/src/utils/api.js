@@ -1,8 +1,6 @@
 import axios from 'axios';
 
-export const BACKEND_URL = import.meta.env.MODE === 'production'
-  ? 'https://civicmindai-backend.onrender.com'
-  : '';
+export const BACKEND_URL = 'https://civicmindai-backend.onrender.com';
 
 const API = axios.create({
   baseURL: `${BACKEND_URL}/api`
