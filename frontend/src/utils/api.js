@@ -1,7 +1,11 @@
 import axios from 'axios';
 
+export const BACKEND_URL = import.meta.env.MODE === 'production'
+  ? 'https://civicmindai-backend.onrender.com'
+  : '';
+
 const API = axios.create({
-  baseURL: '/api'
+  baseURL: `${BACKEND_URL}/api`
 });
 
 // Interceptor to append Authorization Header automatically
@@ -17,5 +21,11 @@ API.interceptors.request.use(
     return Promise.reject(error);
   }
 );
+
+export const getMediaUrl = (url) => {
+  if (!url) return '';
+  if (url.startsWith('http://') || url.startsWith('https://')) return url;
+  return `${BACKEND_URL}${url}`;
+};
 
 export default API;

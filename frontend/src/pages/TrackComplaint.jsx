@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { Search, MapPin, Calendar, User, Shield, CheckCircle, FileText, Play, Image as ImageIcon } from 'lucide-react';
 import { TRANSLATIONS } from '../utils/translation';
-import API from '../utils/api';
+import API, { getMediaUrl } from '../utils/api';
 
 const TrackComplaint = ({ lang }) => {
   const t = TRANSLATIONS[lang] || TRANSLATIONS.English;
@@ -162,15 +162,15 @@ const TrackComplaint = ({ lang }) => {
                     return (
                       <a
                         key={idx}
-                        href={url}
+                        href={getMediaUrl(url)}
                         target="_blank"
                         rel="noreferrer"
                         className="relative w-20 h-20 rounded-xl border border-slate-200 dark:border-slate-700 overflow-hidden bg-slate-100 flex items-center justify-center hover:opacity-80 transition-opacity"
                       >
-                        {isImg && <img src={url} alt="Grievance file" className="w-full h-full object-cover" />}
+                        {isImg && <img src={getMediaUrl(url)} alt="Grievance file" className="w-full h-full object-cover" />}
                         {isVid && (
                           <div className="relative w-full h-full">
-                            <video src={url} className="w-full h-full object-cover" />
+                            <video src={getMediaUrl(url)} className="w-full h-full object-cover" />
                             <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
                               <Play className="h-4 w-4 text-white" />
                             </div>
@@ -196,12 +196,12 @@ const TrackComplaint = ({ lang }) => {
                   {complaint.progressPhotos.map((url, idx) => (
                     <a
                       key={idx}
-                      href={url}
+                      href={getMediaUrl(url)}
                       target="_blank"
                       rel="noreferrer"
                       className="w-24 h-24 rounded-xl border border-green-200 dark:border-green-900/50 overflow-hidden shadow"
                     >
-                      <img src={url} alt="Proof" className="w-full h-full object-cover" />
+                      <img src={getMediaUrl(url)} alt="Proof" className="w-full h-full object-cover" />
                     </a>
                   ))}
                 </div>
